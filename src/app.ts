@@ -5,6 +5,6 @@ import carRoutes from './Routes/CarRoutes';
 const app = express();
 app.use(express.json());
 app.use(carRoutes);
-app.use(ErrorHandler.handle);
+app.use(ErrorHandler);
 
 export default app;
