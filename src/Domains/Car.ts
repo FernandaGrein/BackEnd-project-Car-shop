@@ -15,7 +15,7 @@ class Car {
     this.model = car.model;
     this.color = car.color;
     this.year = car.year;
-    this.status = car.status;
+    this.status = car.status || false;
     this.buyValue = car.buyValue;
     this.doorsQty = car.doorsQty;
     this.seatsQty = car.seatsQty;
