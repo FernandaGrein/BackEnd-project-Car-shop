@@ -48,6 +48,37 @@ describe('testa se é possível buscar um carro no banco de dados', function () 
     }
   });
 
+  it('testa se é possível buscar todos os carros com sucesso', async function () {
+    const carInstace: ICar[] = [
+      {
+        id: '634852326b35b59438fbea2f',
+        model: 'Marea',
+        year: 2002,
+        color: 'Black',
+        status: true,
+        buyValue: 15.99,
+        doorsQty: 4,
+        seatsQty: 5,
+      },
+      {
+        id: '634852326b35b59438fbea31',
+        model: 'Tempra',
+        year: 1995,
+        color: 'Black',
+        buyValue: 39,
+        doorsQty: 2,
+        seatsQty: 5,
+      },
+    ];
+
+    const outputCars = carInstace.map((item) => new Car(item));
+
+    sinon.stub(Model, 'find').resolves(outputCars);
+    const service = new CarService();
+    const result = await service.getAllCars();
+    expect(result).to.be.deep.equal(outputCars);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
