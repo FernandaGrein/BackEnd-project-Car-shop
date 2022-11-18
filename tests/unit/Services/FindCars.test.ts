@@ -38,7 +38,7 @@ describe('testa se é possível buscar um carro no banco de dados', function () 
     }
   });
   it('testa se quando não for encontrado um carro um erro é lançado', async function () {
-    sinon.stub(Model, 'findOne').resolves(false);
+    sinon.stub(Model, 'findOne').resolves(null);
 
     try {
       const service = new CarService();

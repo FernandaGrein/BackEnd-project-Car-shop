@@ -36,5 +36,7 @@ describe('testa se é possível criar um carro', function () {
     const result = await service.creatCar(InputCar);
     
     expect(result).to.be.deep.equal(OutputCar);
+
+    sinon.restore();
   });
 });
