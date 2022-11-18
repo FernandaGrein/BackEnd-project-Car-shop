@@ -1,9 +1,11 @@
 import { Model } from 'mongoose';
 import { expect } from 'chai';
-import Sinon from 'sinon';
+import sinon from 'sinon';
 import Car from '../../../src/Domains/Car';
 import CarService from '../../../src/Services/CarService';
 import ICar from '../../../src/Interfaces/ICar';
+import INvalidIdError from '../../../src/Middlewares/InvalidIdError';
+import NotFoundError from '../../../src/Middlewares/NotFoundError';
 
 describe('testa se é possível buscar um carro no banco de dados', function () {
   it('testa se é possível buscar um carro com sucesso pelo Id', async function () {
@@ -19,9 +21,34 @@ describe('testa se é possível buscar um carro no banco de dados', function () 
     };
 
     const outputCars = new Car(CarInstance);
-    Sinon.stub(Model, 'findOne').resolves(CarInstance);
+    sinon.stub(Model, 'findOne').resolves(CarInstance);
     const service = new CarService();
     const result = await service.getCarById('634852326b35b59438fbea2f');
     expect(result).to.be.deep.equal(outputCars);
+  });
+
+  it('testa que não é possível criar um carro com id inválido', async function () {
+    sinon.stub(Model, 'findOne').resolves(false);
+
+    try {
+      const service = new CarService();
+      await service.getCarById('59438fbea2f');
+    } catch (error) {
+      expect((error as INvalidIdError).message).to.be.equal('Invalid mongo id'); 
+    }
+  });
+  it('testa se quando não for encontrado um carro um erro é lançado', async function () {
+    sinon.stub(Model, 'findOne').resolves(false);
+
+    try {
+      const service = new CarService();
+      await service.getCarById('634853326a35b59438fbea2f');
+    } catch (error) {
+      expect((error as NotFoundError).message).to.be.equal('Car not found'); 
+    }
+  });
+
+  afterEach(function () {
+    sinon.restore();
   });
 });
