@@ -34,6 +34,17 @@ class MotoServices {
 
     return this.createMotoDomain(motoById);
   }
+
+  public async updateMotobyId(id: string, motoToUpdate: IMotorcycle) {
+    if (!isValidObjectId(id)) throw new INvalidIdError('Invalid mongo id');
+    
+    const motoOdm = new MotoODM();
+    const updatedMoto = await motoOdm.updateById(id, motoToUpdate);
+    
+    if (updatedMoto === null) throw new NotFoundError('Motorcycle not found');
+
+    return this.createMotoDomain(updatedMoto);
+  }
 }
 
 export default MotoServices;
