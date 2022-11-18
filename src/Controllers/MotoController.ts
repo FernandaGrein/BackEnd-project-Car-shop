@@ -25,6 +25,25 @@ class MotorController {
       this.next(error);
     }
   }
+
+  public async getAllMotos() {
+    try {
+      const allMotos = await this.service.getAllMotos();
+      return this.res.status(200).json(allMotos);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async getMotoById() {
+    const { id } = this.req.params;
+    try {
+      const carById = await this.service.getMotoById(id);
+      return this.res.status(200).json(carById);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default MotorController;

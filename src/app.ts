@@ -5,8 +5,8 @@ import motoRoutes from './Routes/MotoRoutes';
 
 const app = express();
 app.use(express.json());
-app.use(carRoutes);
-app.use(motoRoutes);
+app.use('/cars', carRoutes);
+app.use('/motorcycles', motoRoutes);
 app.use(ErrorHandler);
 
 export default app;
