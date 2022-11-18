@@ -7,7 +7,7 @@ import IMotorcycle from '../../../src/Interfaces/IMotorcycle';
 import MotorCycle from '../../../src/Domains/Motorcycle';
 import MotoServices from '../../../src/Services/MotoServices';
 
-describe('testa se é possível atualizar uma moto', function () {
+describe('testa se é possível atualizar uma motocicleta', function () {
   const INPUTMOTO: IMotorcycle = {
     model: 'Honda Cb 600f Hornet',
     year: 2014,
@@ -17,7 +17,7 @@ describe('testa se é possível atualizar uma moto', function () {
     category: 'Street',
     engineCapacity: 600,
   };
-  it('testa se é possível atualizar uma moto com sucesso', async function () {
+  it('testa se é possível atualizar uma motocicleta com sucesso', async function () {
     const motoInstance: IMotorcycle = {
       id: '634852326b35b59438fbea2f',
       model: 'Honda Cb 600f Hornet',
@@ -39,7 +39,7 @@ describe('testa se é possível atualizar uma moto', function () {
     expect(result).to.be.deep.equal(outputMoto);
   });
 
-  it('testa se quando não for encontrada uma moto um erro é lançado', async function () {
+  it('testa se quando não for encontrada uma motocicleta um erro é lançado', async function () {
     sinon.stub(Model, 'findByIdAndUpdate').resolves(null);
 
     try {
@@ -50,7 +50,7 @@ describe('testa se é possível atualizar uma moto', function () {
     }
   });
 
-  it('testa que não é possível atualizar um carro com id inválido', async function () {
+  it('testa que não é possível atualizar uma motocicleta com id inválido', async function () {
     sinon.stub(Model, 'findByIdAndUpdate').resolves(false);
 
     try {

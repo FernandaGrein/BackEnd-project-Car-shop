@@ -7,8 +7,8 @@ import IMotorcycle from '../../../src/Interfaces/IMotorcycle';
 import MotorCycle from '../../../src/Domains/Motorcycle';
 import MotoServices from '../../../src/Services/MotoServices';
 
-describe('testa se é possível buscar uma moto no banco de dados', function () {
-  it('testa se é possível buscar uma moto com sucesso pelo Id', async function () {
+describe('testa se é possível buscar uma motocicleta no banco de dados', function () {
+  it('testa se é possível buscar uma motocicleta com sucesso pelo Id', async function () {
     const motoInstance: IMotorcycle = {
       id: '634852326b35b59438fbea31',
       model: 'Honda Cbr 1000rr',
@@ -27,7 +27,7 @@ describe('testa se é possível buscar uma moto no banco de dados', function () 
     expect(result).to.be.deep.equal(outputMoto);
   });
 
-  it('testa que não é possível criar uma moto com id inválido', async function () {
+  it('testa que não é possível criar uma motocicleta com id inválido', async function () {
     sinon.stub(Model, 'findOne').resolves(false);
 
     try {
@@ -37,7 +37,7 @@ describe('testa se é possível buscar uma moto no banco de dados', function () 
       expect((error as INvalidIdError).message).to.be.equal('Invalid mongo id'); 
     }
   });
-  it('testa se quando não for encontrado uma moto um erro é lançado', async function () {
+  it('testa se quando não for encontrado uma motocicleta um erro é lançado', async function () {
     sinon.stub(Model, 'findOne').resolves(null);
 
     try {
@@ -48,7 +48,7 @@ describe('testa se é possível buscar uma moto no banco de dados', function () 
     }
   });
 
-  it('testa se é possível buscar todas as motos com sucesso', async function () {
+  it('testa se é possível buscar todas as motocicletas com sucesso', async function () {
     const motoInstance: IMotorcycle[] = [
       {
         id: '634852326b35b59438fbea2f',

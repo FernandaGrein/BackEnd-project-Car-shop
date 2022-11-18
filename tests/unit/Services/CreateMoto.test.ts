@@ -28,14 +28,14 @@ describe('testa se é possível criar uma motocicleta', function () {
       engineCapacity: 600,
     };
 
-    const OutputCar = new MotorCycle(MotoInstance);
+    const outputMoto = new MotorCycle(MotoInstance);
 
     sinon.stub(Model, 'create').resolves(MotoInstance);
 
     const service = new MotoServices();
     const result = await service.createMoto(InputMoto);
     
-    expect(result).to.be.deep.equal(OutputCar);
+    expect(result).to.be.deep.equal(outputMoto);
 
     sinon.restore();
   });
