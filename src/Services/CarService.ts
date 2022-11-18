@@ -5,6 +5,9 @@ import INvalidIdError from '../Middlewares/InvalidIdError';
 import NotFoundError from '../Middlewares/NotFoundError';
 import CarODM from '../Models/CarODM';
 
+const NOT_FOUND = 'Car not found';
+const INVALID_ID = 'Invalid mongo id';
+
 class CarService {
   public createCarDomain(carObj: ICar): Car {
     return new Car(carObj);
@@ -26,25 +29,36 @@ class CarService {
   }
 
   public async getCarById(id: string) {
-    if (!isValidObjectId(id)) throw new INvalidIdError('Invalid mongo id');
+    if (!isValidObjectId(id)) throw new INvalidIdError(INVALID_ID);
     
     const carOdm = new CarODM();
     const carById = await carOdm.findById(id) as ICar;
 
-    if (carById === null) throw new NotFoundError('Car not found');
+    if (carById === null) throw new NotFoundError(NOT_FOUND);
 
     return this.createCarDomain(carById);
   }
 
   public async updateCarbyId(id: string, carToUpdate: ICar) {
-    if (!isValidObjectId(id)) throw new INvalidIdError('Invalid mongo id');
+    if (!isValidObjectId(id)) throw new INvalidIdError(INVALID_ID);
     
     const carOdm = new CarODM();
     const updatedCar = await carOdm.updateById(id, carToUpdate);
     
-    if (updatedCar === null) throw new NotFoundError('Car not found');
+    if (updatedCar === null) throw new NotFoundError(NOT_FOUND);
 
     return this.createCarDomain(updatedCar);
+  }
+
+  public async deleteCarById(id: string) {
+    if (!isValidObjectId(id)) throw new INvalidIdError(INVALID_ID);
+
+    const carOdm = new CarODM();
+    const deletedCar = await carOdm.deleteById(id);
+
+    if (!deletedCar) throw new NotFoundError(NOT_FOUND);
+
+    return this.createCarDomain(deletedCar);
   }
 }
 

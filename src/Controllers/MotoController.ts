@@ -56,6 +56,17 @@ class MotorController {
       this.next(error);
     }
   }
+
+  public async deleteMotoById() {
+    const { id } = this.req.params;
+
+    try {
+      await this.service.deleteMotoById(id);
+      return this.res.sendStatus(204);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default MotorController;

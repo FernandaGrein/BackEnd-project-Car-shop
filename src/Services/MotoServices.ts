@@ -5,6 +5,8 @@ import MotoODM from '../Models/MotoODM';
 import INvalidIdError from '../Middlewares/InvalidIdError';
 import NotFoundError from '../Middlewares/NotFoundError';
 
+const NOT_FOUND = 'Motorcycle not found';
+const INVALID_ID = 'Invalid mongo id';
 class MotoServices {
   public createMotoDomain(motoObj: IMotorcycle): MotorCycle {
     return new MotorCycle(motoObj);
@@ -26,24 +28,35 @@ class MotoServices {
   }
 
   public async getMotoById(id: string) {
-    if (!isValidObjectId(id)) throw new INvalidIdError('Invalid mongo id');
+    if (!isValidObjectId(id)) throw new INvalidIdError(INVALID_ID);
     const motoOdm = new MotoODM();
     const motoById = await motoOdm.findById(id);
 
-    if (motoById === null) throw new NotFoundError('Motorcycle not found');
+    if (motoById === null) throw new NotFoundError(NOT_FOUND);
 
     return this.createMotoDomain(motoById);
   }
 
   public async updateMotobyId(id: string, motoToUpdate: IMotorcycle) {
-    if (!isValidObjectId(id)) throw new INvalidIdError('Invalid mongo id');
+    if (!isValidObjectId(id)) throw new INvalidIdError(INVALID_ID);
     
     const motoOdm = new MotoODM();
     const updatedMoto = await motoOdm.updateById(id, motoToUpdate);
     
-    if (updatedMoto === null) throw new NotFoundError('Motorcycle not found');
+    if (updatedMoto === null) throw new NotFoundError(NOT_FOUND);
 
     return this.createMotoDomain(updatedMoto);
+  }
+
+  public async deleteMotoById(id: string) {
+    if (!isValidObjectId(id)) throw new INvalidIdError(INVALID_ID);
+
+    const motoOdm = new MotoODM();
+    const deletedMoto = await motoOdm.deleteById(id);
+
+    if (!deletedMoto) throw new NotFoundError(NOT_FOUND);
+
+    return this.createMotoDomain(deletedMoto);
   }
 }
 
