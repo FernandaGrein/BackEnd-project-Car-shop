@@ -85,9 +85,11 @@ export const DELETEDCAR = {
   seatsQty: 5,
 };
 
+const HONDA = 'Honda Cb 600f Hornet';
+
 export const CREATEMOTOOUTPUT = {
   id: '6348513f34c397abcad040b2',
-  model: 'Honda Cb 600f Hornet',
+  model: HONDA,
   year: 2005,
   color: 'Yellow',
   status: true,
@@ -97,7 +99,7 @@ export const CREATEMOTOOUTPUT = {
 };
 
 export const MOTOINPUT = {
-  model: 'Honda Cb 700f Hornet',
+  model: HONDA,
   year: 2005,
   color: 'Yellow',
   status: true,
@@ -109,7 +111,7 @@ export const MOTOINPUT = {
 export const FINDALLMOTOS = [
   {
     id: '634852326b35b59438fbea2f',
-    model: 'Honda Cb 900f Hornet',
+    model: HONDA,
     year: 2005,
     color: 'Yellow',
     status: true,
@@ -138,4 +140,36 @@ export const MOTOFINDEDBYID = {
   buyValue: 59.900,
   category: 'Street',
   engineCapacity: 1000,
+};
+
+export const UPDATEDMOTO = {
+  id: '634852326b35b59438fbea2f',
+  model: HONDA,
+  year: 2014,
+  color: 'Red',
+  status: true,
+  buyValue: 45.000,
+  category: 'Street',
+  engineCapacity: 600,
+};
+
+export const MOTOTOUPDATE = {
+  model: HONDA,
+  year: 2014,
+  color: 'Red',
+  status: true,
+  buyValue: 45.000,
+  category: 'Street',
+  engineCapacity: 600,
+};
+
+export const DELETEDMOTO = {
+  id: '634852326b35b59438fbea2f',
+  model: HONDA,
+  year: 2014,
+  color: 'Red',
+  status: true,
+  buyValue: 45.000,
+  category: 'Street',
+  engineCapacity: 600,
 };
